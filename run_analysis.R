@@ -1,5 +1,4 @@
 library(data.table)
-setwd("C:/Users/uphilli/Documents/R/coursera")
 
 # read all files needed for analysis
 train_set <- as.data.table(read.table("./UCI HAR Dataset/train/X_train.txt"))
@@ -25,10 +24,6 @@ set_colnames <- function(dataset,colnum) {
 train_new <- set_colnames(dataset = train_new, colnum = 1:79) 
 test_new <- set_colnames(dataset = test_new, colnum = 1:79) 
 
-#Clean up the column names in the Activity data
-setnames(activity,1,"Activity_code")
-setnames(activity,2,"Activity")
-
 #merge train and test sets with the subject number and activity
 train_complete <- cbind(train_subject, train_labels, train_new)
 test_complete <- cbind(test_subject, test_labels, test_new)
@@ -36,7 +31,9 @@ test_complete <- cbind(test_subject, test_labels, test_new)
 #combine the train and test sets
 complete_set <- as.data.table(rbind(train_complete, test_complete))
 
-#add in activity names
+#Merge activity names into the dataset 
+setnames(activity,1,"Activity_code")
+setnames(activity,2,"Activity")
 setnames(complete_set,1,"Subject")
 setnames(complete_set,2,"Activity_code")
 setkey(complete_set, "Activity_code")
@@ -48,4 +45,4 @@ complete_3 <- complete_2[,lapply(.SD, mean), by = c("Subject","Activity")]
 complete_3 <- complete_3[order(Subject,Activity_code)]
 
 #output the data
-write.table(complete_3,"./coursera/tidy_data.txt",row.name = FALSE)
+write.table(complete_3,"./tidy_data.txt",row.name = FALSE)
