@@ -7,7 +7,7 @@ The dataset includes the following variables:
 
 - Activity_code: numerical code corresponding to each separate activity. 
 
-Additionally, a mean and standard deviation were calculated for each subject performing each activity across all features. The features included in this dataset are: 
+Additionally, a mean and standard deviation in Hz were calculated for each subject performing each activity across all features. The features included in this dataset are: 
 
 tBodyAcc-XYZ
 tGravityAcc-XYZ
@@ -29,8 +29,8 @@ fBodyGyroJerkMag
 
 The set of variables that were estimated from these signals are: 
 
-mean(): Mean value for each activity and subject
-std(): Standard deviation for each activity and subject 
+mean(): Mean value for each subject in each activity, in Hz
+std(): Standard deviation for each subject in each activity, in Hz 
 
 An explanation of the feature selection process is included below.  
 
